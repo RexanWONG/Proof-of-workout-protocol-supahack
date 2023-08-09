@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+// Optimism Goerli : 0xC7652D2fAB1fBe30D5C939965f38f4F552221EF0
 pragma solidity 0.8.17;
 
 import "../lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
@@ -7,23 +8,31 @@ import "../lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721En
 import "../lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 import "../lib/openzeppelin-contracts/contracts/utils/Counters.sol";
-
 import "../lib/openzeppelin-contracts/contracts/utils/math/SafeMath.sol";
 
-// import { IEAS, AttestationRequest, AttestationRequestData } from "../lib/eas-contracts/contracts/IEAS.sol";
-
+import { IEAS, AttestationRequest, AttestationRequestData } from "../lib/eas-contracts/contracts/IEAS.sol";
+import { NO_EXPIRATION_TIME, EMPTY_UID } from "../lib/eas-contracts/contracts/Common.sol";
 
 import "./OptimismProofOfWorkoutToken.sol";
 
-contract QuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IERC721Receiver, Ownable {
-    ProofOfWorkoutToken _powToken;
+contract OptimismQuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IERC721Receiver, Ownable {
+    OptimismProofOfWorkoutToken _powToken;
+    error InvalidEAS();
     
     using SafeMath for uint256; 
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
 
-    constructor() ERC721("Proof of Workout Protocol", "POWP") {
-        _powToken = ProofOfWorkoutToken(0x92DFBD87ec23120223593E903A5e753772E4039e);
+    IEAS private immutable _eas;
+
+    constructor(IEAS eas) ERC721("Proof of Workout Protocol Optimism", "POWP") {
+        _powToken = OptimismProofOfWorkoutToken(0x1Bb3a8DcAEFECd61c9E51E29c3aA38F705f04EDC);
+
+        if (address(eas) == address(0)) {
+            revert InvalidEAS();
+        }
+
+        _eas = eas;
     } 
 
     uint256 public numOfQuestChallenges;
@@ -51,6 +60,7 @@ contract QuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IERC721Rece
         uint256 stakeAmount;
         uint256 startTime;
         bool completed;
+        uint256 attestationUid;
     }
 
     mapping(uint256 => Quest) public quests;
@@ -133,6 +143,8 @@ contract QuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IERC721Rece
 
         payable(msg.sender).transfer(questChallenge.stakeAmount);
         _powToken.mintFromQuestCompletion(msg.sender, powTokenReward);
+        uint256 attestationUid = uint256(_attestChallengeCompleted(questChallenge.questTokenId));
+        questChallenge.attestationUid = attestationUid;
     }
 
     function failQuest(uint256 _challengeId) payable public {
@@ -152,6 +164,23 @@ contract QuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IERC721Rece
         }
 
         _powToken.burnFromFailure(questChallenge.submitter);
+    }
+
+    function _attestChallengeCompleted(uint256 challengeId) private returns (bytes32) {
+        return
+            _eas.attest(
+                AttestationRequest({
+                    schema: bytes32(0x199b7ef58c2ed552686cbfef8a224dd67db53a8b50e8298d27c475be01e4f678),
+                    data: AttestationRequestData({
+                        recipient: address(0), // No recipient
+                        expirationTime: NO_EXPIRATION_TIME, // No expiration time
+                        revocable: true,
+                        refUID: EMPTY_UID, // No references UI
+                        data: abi.encode(challengeId), // Encode a single uint256 as a parameter to the schema
+                        value: 0 // No value/ETH
+                    })
+                })
+            );
     }
 
     function getQuests() public view returns (Quest[] memory) {

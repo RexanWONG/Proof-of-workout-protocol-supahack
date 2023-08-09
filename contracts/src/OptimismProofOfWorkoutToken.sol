@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+// Optimism Goerli : 0x1Bb3a8DcAEFECd61c9E51E29c3aA38F705f04EDC
 pragma solidity 0.8.17;
 
 import "../lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
@@ -7,7 +8,7 @@ import "../lib/openzeppelin-contracts/contracts/security/Pausable.sol";
 import "../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 import "../lib/openzeppelin-contracts/contracts/utils/math/SafeMath.sol";
 
-contract ProofOfWorkoutToken is ERC20, ERC20Burnable, Pausable, Ownable {
+contract OptimismProofOfWorkoutToken is ERC20, ERC20Burnable, Pausable, Ownable {
     using SafeMath for uint256;
 
     uint256 public constant MAX_SUPPLY = 42 * 10**6 * 10**18; // 42 million POW tokens.
