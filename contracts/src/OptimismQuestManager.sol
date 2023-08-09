@@ -10,7 +10,10 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
-import "./ProofOfWorkoutToken.sol";
+// import { IEAS, AttestationRequest, AttestationRequestData } from "@eas-contracts/contracts/IEAS.sol";
+
+
+import "./OptimismProofOfWorkoutToken.sol";
 
 contract QuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IERC721Receiver, Ownable {
     ProofOfWorkoutToken _powToken;
