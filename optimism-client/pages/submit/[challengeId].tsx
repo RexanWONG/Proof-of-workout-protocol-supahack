@@ -26,7 +26,7 @@ const Submit = () => {
     const router = useRouter(); 
     const { challengeId } = router.query; 
 
-    const STRAVA_CLIENT_ID = process.env.NEXT_STRAVA_CLIENT_ID
+    const STRAVA_CLIENT_ID = process.env.NEXT_STRAVA_CLIENT_ID  
     const STRAVA_OAUTH_LINK = `https://www.strava.com/oauth/authorize?client_id=${STRAVA_CLIENT_ID}&response_type=code&redirect_uri=https://proof-of-workout-protocol-supahack-optimism-goerli.vercel.app/submit/${challengeId}&approval_prompt=force&scope=activity:read`
     
     const [isLoading, setIsLoading] = useState(false)
