@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Optimism Goerli : 0xC7652D2fAB1fBe30D5C939965f38f4F552221EF0
+// Optimism Goerli : 0x78584CE63aeCd8943D8A4119e679902fdA0B8C2d
 pragma solidity 0.8.17;
 
 import "../lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
@@ -170,9 +170,9 @@ contract OptimismQuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IER
         return
             _eas.attest(
                 AttestationRequest({
-                    schema: bytes32(0x199b7ef58c2ed552686cbfef8a224dd67db53a8b50e8298d27c475be01e4f678),
+                    schema: bytes32(0x04462d0d9cee5b9d0be784a050c78643f2a83d51c5afbd175ce822e77e8eb316),
                     data: AttestationRequestData({
-                        recipient: address(0), // No recipient
+                        recipient: msg.sender, 
                         expirationTime: NO_EXPIRATION_TIME, // No expiration time
                         revocable: true,
                         refUID: EMPTY_UID, // No references UI
