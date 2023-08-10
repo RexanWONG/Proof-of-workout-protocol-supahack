@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 html,
@@ -5,18 +9,15 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Inter", sans-serif;
+  background-color: black; /* Adding a black background color */
 }
 
-a {
-  color: #84309c;
-  text-decoration: none;
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  color: #e7e8e8;
-  background: #070707;
+.animate-dots::after {
+  content: '';
+  animation: blink 1s infinite;
 }
