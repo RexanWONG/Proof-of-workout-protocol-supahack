@@ -7,7 +7,7 @@ export default function Home() {
             <LandingDescription />
 
             <div className='flex flex-row items-center justify-center gap-16'>
-                <a href={'/dashboard'}>
+                <a href={'https://proof-of-workout-protocol-supahack-optimism-goerli.vercel.app'}>
                   <button className='bg-white hover:bg-red-500 px-5 py-3 rounded-lg'>
                       <h1 className='text-black font-bold'>
                         Launch on Optimism Goerli
