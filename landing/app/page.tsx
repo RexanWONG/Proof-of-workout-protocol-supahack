@@ -25,7 +25,7 @@ export default function Home() {
                 <a href={'/dashboard'}>
                   <button className='bg-white hover:bg-purple-500 hover:animate-text px-5 py-3 rounded-lg'>
                       <h1 className='text-black font-bold'>
-                        Launch oan Zora
+                        Launch on Zora
                       </h1>
                   </button>
                 </a>
