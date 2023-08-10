@@ -21,7 +21,7 @@ interface Activity {
 interface ActivitiesResponse {
     activities: Activity[];
 }
-
+ 
 const Submit = () => {
     const router = useRouter(); 
     const { challengeId } = router.query; 
