@@ -29,6 +29,14 @@ export default function Home() {
                       </h1>
                   </button>
                 </a>
+
+                <a href={'/dashboard'}>
+                  <button className='bg-white hover:bg-yellow-500 hover:animate-text px-5 py-3 rounded-lg'>
+                      <h1 className='text-black font-bold'>
+                        Launch on Mode
+                      </h1>
+                  </button>
+                </a>
             </div>
 
             <p className='text-white mt-16'>Note : Ethereum attestation services (eas) are only avaliable on Optimism and Base</p>
