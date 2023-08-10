@@ -5,7 +5,7 @@ import { abi, contractAddress } from '../../constants/QuestManager/questManager'
 
 import Navbar from '../../components/Navbar';
 import Loading from '../../components/Loading';
-
+ 
 interface Activity {
     id: number
     name: string;
