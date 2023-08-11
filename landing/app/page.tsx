@@ -22,10 +22,10 @@ export default function Home() {
                   </button>
                 </a>
 
-                <a href={'/dashboard'} target='_blank' rel='noopener noreferrer'>
+                <a href={'https://proof-of-workout-protocol-supahack-zora-goerli.vercel.app'} target='_blank' rel='noopener noreferrer'>
                   <button className='bg-white hover:bg-purple-500 hover:animate-text px-5 py-3 rounded-lg'>
                       <h1 className='text-black font-bold'>
-                        Launch on Zora
+                        Launch on Zora Testnet
                       </h1>
                   </button>
                 </a>
