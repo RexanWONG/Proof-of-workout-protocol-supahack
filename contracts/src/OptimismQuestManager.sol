@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Optimism Goerli : 0x4B704d0f4AF342086e585e4F3AD6B263fD409662
+// Optimism Goerli : 0x1e753753141c342C865EAcf9e66d62fB603d8154
 pragma solidity 0.8.17;
 
 import "../lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
@@ -143,7 +143,7 @@ contract OptimismQuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IER
 
         payable(msg.sender).transfer(questChallenge.stakeAmount);
         _powToken.mintFromQuestCompletion(msg.sender, powTokenReward);
-        bytes32 attestationUid = _attestChallengeCompleted(questChallenge.questTokenId);
+        bytes32 attestationUid = _attestChallengeCompleted(questChallenge.challengeId);
         questChallenge.attestationUid = attestationUid;
     }
 
@@ -170,7 +170,7 @@ contract OptimismQuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IER
         return
             _eas.attest(
                 AttestationRequest({
-                    schema: bytes32(0x04462d0d9cee5b9d0be784a050c78643f2a83d51c5afbd175ce822e77e8eb316),
+                    schema: bytes32(0x5ea93ec8eac7206ebc8ed6c8fcc1f33875a75418f808893a91d54b31248431cd),
                     data: AttestationRequestData({
                         recipient: msg.sender, 
                         expirationTime: NO_EXPIRATION_TIME, // No expiration time
