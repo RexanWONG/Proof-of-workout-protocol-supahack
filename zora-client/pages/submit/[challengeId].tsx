@@ -5,7 +5,7 @@ import { abi, contractAddress } from '../../constants/QuestManager/questManager'
 
 import Navbar from '../../components/Navbar';
 import Loading from '../../components/Loading';
- 
+
 interface Activity {
     id: number
     name: string;
@@ -27,7 +27,7 @@ const Submit = () => {
     const { challengeId } = router.query; 
 
     const STRAVA_CLIENT_ID = process.env.NEXT_STRAVA_CLIENT_ID  
-    const STRAVA_OAUTH_LINK = `https://www.strava.com/oauth/authorize?client_id=${STRAVA_CLIENT_ID}&response_type=code&redirect_uri=https://proof-of-workout-protocol-supahack-zora-goerli-rexanwong.vercel.app/submit/${challengeId}&approval_prompt=force&scope=activity:read`
+    const STRAVA_OAUTH_LINK = `https://www.strava.com/oauth/authorize?client_id=${STRAVA_CLIENT_ID}&response_type=code&redirect_uri=https://proof-of-workout-protocol-supahack-zora-goerli.vercel.app/submit/${challengeId}&approval_prompt=force&scope=activity:read`
     
     const [isLoading, setIsLoading] = useState(false)
     const [activitiesList, setActivitiesList] = useState<ActivitiesResponse | null>(null);
