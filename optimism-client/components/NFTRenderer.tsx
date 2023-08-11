@@ -53,7 +53,7 @@ const NFTRenderer: React.FC<NFTRendererProps> = ({ ownedItems }) =>  {
             
             for (let i = 0 ; i < questChallenges.length ; i++) {
                 if (id == Number(questChallenges[i][1])) {
-                    return <p>{String(questChallenges[i][7])}</p>
+                    return String(questChallenges[i][7])
                 }
             }
         }
@@ -78,10 +78,20 @@ const NFTRenderer: React.FC<NFTRendererProps> = ({ ownedItems }) =>  {
                             </div>
                         </div>
                     </div>
-                    <button onClick={() => addNFTIntoMetamask(item.metadata.id)} className='text-gray-400 hover:underline hover:cursor-pointer mt-2'>
-                        Add NFT into your Metamask
-                    </button>
-                    <p>{getAttestationFromId(Number(item.metadata.id))}</p>
+                    <div className='flex flex-col items-start justify-start'>
+                        <button onClick={() => addNFTIntoMetamask(item.metadata.id)} className='text-gray-400 hover:underline hover:cursor-pointer mt-2'>
+                            Add NFT into your Metamask
+                        </button>
+                        <a
+                            href={`https://optimism-goerli-bedrock.easscan.org/attestation/view/${getAttestationFromId(Number(item.metadata.id))}`}
+                            className='text-white hover:underline'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            >
+                            View attestation
+                        </a>
+
+                    </div>
 
                 </div>
             )}
