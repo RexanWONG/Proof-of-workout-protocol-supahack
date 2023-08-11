@@ -94,7 +94,7 @@ const NFTRenderer: React.FC<NFTRendererProps> = ({ ownedItems }) =>  {
                             Add NFT into your Metamask
                         </button>
                         <a
-                            href={`https://base-goerli-bedrock.easscan.org/attestation/view/${getAttestationFromId(Number(item.metadata.id))}`}
+                            href={`https://base-goerli.easscan.org/attestation/view/${getAttestationFromId(Number(item.metadata.id))}`}
                             className='text-white hover:underline'
                             target='_blank'
                             rel='noopener noreferrer'
