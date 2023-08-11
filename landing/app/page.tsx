@@ -14,7 +14,7 @@ export default function Home() {
                       </h1>
                   </button>
                 </a>
-                <a href={'/dashboard'}>
+                <a href={'https://proof-of-workout-protocol-supahack-base-goerli.vercel.app'}>
                   <button className='bg-white hover:bg-blue-500 px-5 py-3 rounded-lg'>
                       <h1 className='text-black font-bold'>
                         Launch on Base Goerli
