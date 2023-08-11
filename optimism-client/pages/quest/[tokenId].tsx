@@ -55,6 +55,7 @@ const Quest = () => {
 
             }
 
+            console.log(challengeList)
             setChallenges(challengeList as [])
         }
 

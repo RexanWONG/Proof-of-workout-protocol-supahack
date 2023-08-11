@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Optimism Goerli : 0x78584CE63aeCd8943D8A4119e679902fdA0B8C2d
+// Optimism Goerli : 0x4B704d0f4AF342086e585e4F3AD6B263fD409662
 pragma solidity 0.8.17;
 
 import "../lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
@@ -60,7 +60,7 @@ contract OptimismQuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IER
         uint256 stakeAmount;
         uint256 startTime;
         bool completed;
-        uint256 attestationUid;
+        bytes32 attestationUid;
     }
 
     mapping(uint256 => Quest) public quests;
@@ -134,16 +134,16 @@ contract OptimismQuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IER
 
         uint256 powTokenReward = _powToken.computePowTokenReward(
             questChallenge.stakeAmount, 
-            questChallenge.workoutDuration, 
+            questChallenge.workoutDuration,  
             quest.questDifficulty  
         );
 
-        _safeMint(msg.sender, quest.tokenId);
-        _setTokenURI(quest.tokenId, _metadataURI);
+        _safeMint(msg.sender, questChallenge.challengeId);
+        _setTokenURI(questChallenge.challengeId, _metadataURI);
 
         payable(msg.sender).transfer(questChallenge.stakeAmount);
         _powToken.mintFromQuestCompletion(msg.sender, powTokenReward);
-        uint256 attestationUid = uint256(_attestChallengeCompleted(questChallenge.questTokenId));
+        bytes32 attestationUid = _attestChallengeCompleted(questChallenge.questTokenId);
         questChallenge.attestationUid = attestationUid;
     }
 
@@ -203,6 +203,12 @@ contract OptimismQuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IER
         }
         
         return allQuestChallenges;
+    }
+
+    function getAttestationUidFromQuestChallenge(uint256 _challengeId) public view returns (bytes32) {
+        QuestChallenges storage questChallenge = questChallenges[_challengeId];
+
+        return questChallenge.attestationUid;
     }
 
     // The following functions are overrides required by Solidity.

@@ -1,9 +1,10 @@
-import { ThirdwebNftMedia } from '@thirdweb-dev/react';
+import { ThirdwebNftMedia, useContract, useContractRead } from '@thirdweb-dev/react';
 import { useRouter } from 'next/router';
 
-import { contractAddress } from '../constants/QuestManager/questManager';
+import { contractAddress, abi } from '../constants/QuestManager/questManager';
 
-import React from 'react'
+
+import { useState, useEffect } from 'react'
 
 interface Metadata {
     name: string;
@@ -15,9 +16,13 @@ interface NFTRendererProps {
     ownedItems: Array<{ metadata: Metadata; owner: string; supply: string; type: string }>;
 }
 
-
 const NFTRenderer: React.FC<NFTRendererProps> = ({ ownedItems }) =>  {
     const router = useRouter();
+
+    const { contract } = useContract(contractAddress, abi);
+    const { data: questChallenges, isLoading: isQuestChallengesLoading, error: questChallengesError } = useContractRead(contract, "getQuestChallenges");
+
+    const [challengeAttestationUids, setChallengeAttestationUids] = useState([])
 
     const addNFTIntoMetamask = async(id: string) => {
         try {
@@ -43,6 +48,17 @@ const NFTRenderer: React.FC<NFTRendererProps> = ({ ownedItems }) =>  {
         }
     }
 
+    const getAttestationFromId = (id: number) => {
+        if (!isQuestChallengesLoading && questChallenges) {
+            
+            for (let i = 0 ; i < questChallenges.length ; i++) {
+                if (id == Number(questChallenges[i][1])) {
+                    return <p>{String(questChallenges[i][7])}</p>
+                }
+            }
+        }
+    }
+
     const handleRowClick = (id: number) => {
         router.push(`/quest/${id}`);
     };
@@ -65,6 +81,7 @@ const NFTRenderer: React.FC<NFTRendererProps> = ({ ownedItems }) =>  {
                     <button onClick={() => addNFTIntoMetamask(item.metadata.id)} className='text-gray-400 hover:underline hover:cursor-pointer mt-2'>
                         Add NFT into your Metamask
                     </button>
+                    <p>{getAttestationFromId(Number(item.metadata.id))}</p>
 
                 </div>
             )}
