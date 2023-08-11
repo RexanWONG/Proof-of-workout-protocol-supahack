@@ -85,7 +85,7 @@ const Submit = () => {
     const getActivityDetails = async (code: string, afterTimestamp: number) => {
         try {
             setIsLoading(true);
-            const query = await fetch(`/api/proxy?code=${code}&after=${afterTimestamp}`);
+            const query = await fetch(`/api/proxy?code=${code}&after=${afterTimestamp}&version=optimism`);
             const response = await query.json();
             console.log(response);
             setActivitiesList({ activities: response.activities });
