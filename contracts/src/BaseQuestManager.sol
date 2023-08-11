@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Base Goerli : 0xDE051464708780432ADf9da06C0331BF528cd4E8
+// Base Goerli : 0x09778c274f6d5E8D39eFA14f5169f20C400D5A8D
 pragma solidity 0.8.17;
 
 import "../lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
@@ -18,7 +18,7 @@ import "./BaseProofOfWorkoutToken.sol";
 contract BaseQuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IERC721Receiver, Ownable {
     BaseProofOfWorkoutToken _powToken;
     error InvalidEAS();
-    
+
     using SafeMath for uint256; 
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
@@ -60,7 +60,7 @@ contract BaseQuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IERC721
         uint256 stakeAmount;
         uint256 startTime;
         bool completed;
-        uint256 attestationUid;
+        bytes32 attestationUid;
     }
 
     mapping(uint256 => Quest) public quests;
@@ -134,16 +134,16 @@ contract BaseQuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IERC721
 
         uint256 powTokenReward = _powToken.computePowTokenReward(
             questChallenge.stakeAmount, 
-            questChallenge.workoutDuration, 
+            questChallenge.workoutDuration,  
             quest.questDifficulty  
         );
 
-        _safeMint(msg.sender, quest.tokenId);
-        _setTokenURI(quest.tokenId, _metadataURI);
+        _safeMint(msg.sender, questChallenge.challengeId);
+        _setTokenURI(questChallenge.challengeId, _metadataURI);
 
         payable(msg.sender).transfer(questChallenge.stakeAmount);
         _powToken.mintFromQuestCompletion(msg.sender, powTokenReward);
-        uint256 attestationUid = uint256(_attestChallengeCompleted(questChallenge.questTokenId));
+        bytes32 attestationUid = _attestChallengeCompleted(questChallenge.challengeId);
         questChallenge.attestationUid = attestationUid;
     }
 
@@ -170,9 +170,9 @@ contract BaseQuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IERC721
         return
             _eas.attest(
                 AttestationRequest({
-                    schema: bytes32(0x199b7ef58c2ed552686cbfef8a224dd67db53a8b50e8298d27c475be01e4f678),
+                    schema: bytes32(0x5ea93ec8eac7206ebc8ed6c8fcc1f33875a75418f808893a91d54b31248431cd),
                     data: AttestationRequestData({
-                        recipient: address(0), // No recipient
+                        recipient: msg.sender, 
                         expirationTime: NO_EXPIRATION_TIME, // No expiration time
                         revocable: true,
                         refUID: EMPTY_UID, // No references UI
@@ -203,6 +203,12 @@ contract BaseQuestManager is ERC721, ERC721Enumerable, ERC721URIStorage, IERC721
         }
         
         return allQuestChallenges;
+    }
+
+    function getAttestationUidFromQuestChallenge(uint256 _challengeId) public view returns (bytes32) {
+        QuestChallenges storage questChallenge = questChallenges[_challengeId];
+
+        return questChallenge.attestationUid;
     }
 
     // The following functions are overrides required by Solidity.
