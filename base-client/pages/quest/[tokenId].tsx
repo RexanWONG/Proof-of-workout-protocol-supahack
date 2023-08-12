@@ -114,9 +114,9 @@ const Quest = () => {
 
                     <h1 className='text-white text-2xl mt-10'>Completed users ({[quest[7]].length}) : </h1>
                     <div className="h-64 overflow-y-auto">
-                        <ul>
+                        <ul className='flex flex-col items-center justify-center'>
                             {[quest[7]].map((address, index) => (
-                            <li key={index} className="text-white py-2">
+                            <li key={index} className="flex flex-col items-center justify-center text-white py-2">
                                 {address}
                             </li>
                             ))}
