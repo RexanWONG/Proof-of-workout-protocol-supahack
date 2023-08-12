@@ -64,7 +64,7 @@ By introducing this halving mechanism, we aim to strike a balance between ensuri
 Please note that this formula and the cap are subject to revision in future versions of the dApp based on user feedback, market dynamics, and the growth of the ecosystem.
 
 
-## 🤝 Ways for Companies to Participate
+# 🤝 Ways for Companies to Participate
 Engaging corporate partners within the POW ecosystem presents a mutually beneficial strategy. It enhances user engagement and provides companies with a platform to connect with a dedicated fitness-oriented user base.
 
 
