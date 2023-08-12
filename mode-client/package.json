@@ -1,0 +1,34 @@
+{
+  "name": "mode-client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "export": "next export",
+    "deploy": "next build && next export && npx thirdweb@latest upload out"
+  },
+  "dependencies": {
+    "@thirdweb-dev/react": "^3",
+    "@thirdweb-dev/sdk": "^3",
+    "ethers": "^5",
+    "ipfs-http-client": "^60.0.1",
+    "next": "^13",
+    "react": "^18.2",
+    "react-dom": "^18.2",
+    "react-icons": "^4.10.1",
+    "truncate-eth-address": "^1.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.11",
+    "@types/react": "^18",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.29.0",
+    "eslint-config-next": "^13",
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^4.9.4"
+  }
+}
