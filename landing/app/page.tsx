@@ -8,14 +8,14 @@ export default function Home() {
 
             <div className='flex flex-row items-center justify-center gap-16'>
                 <a href={'https://proof-of-workout-protocol-supahack-optimism-goerli.vercel.app'} target='_blank' rel='noopener noreferrer'>
-                  <button className='bg-white hover:bg-red-500 px-5 py-3 rounded-lg'>
+                  <button className='bg-white hover:bg-red-500 px-7 py-3 rounded-lg'>
                       <h1 className='text-black font-bold'>
                         Launch on Optimism Goerli
                       </h1>
                   </button>
                 </a>
                 <a href={'https://proof-of-workout-protocol-supahack-base-goerli.vercel.app'} target='_blank' rel='noopener noreferrer'>
-                  <button className='bg-white hover:bg-blue-500 px-5 py-3 rounded-lg'>
+                  <button className='bg-white hover:bg-blue-500 px-7 py-3 rounded-lg'>
                       <h1 className='text-black font-bold'>
                         Launch on Base Goerli
                       </h1>
@@ -23,17 +23,17 @@ export default function Home() {
                 </a>
 
                 <a href={'https://proof-of-workout-protocol-supahack-zora-goerli.vercel.app'} target='_blank' rel='noopener noreferrer'>
-                  <button className='bg-white hover:bg-purple-500 hover:animate-text px-5 py-3 rounded-lg'>
+                  <button className='bg-white hover:bg-purple-500 px-7 py-3 rounded-lg'>
                       <h1 className='text-black font-bold'>
-                        Launch on Zora Testnet
+                        Launch on Zora Goerli
                       </h1>
                   </button>
                 </a>
 
-                <a href={'/dashboard'} target='_blank' rel='noopener noreferrer'>
-                  <button className='bg-white hover:bg-yellow-500 hover:animate-text px-5 py-3 rounded-lg'>
+                <a href={'https://proof-of-workout-protocol-supahack-mode-sepolia.vercel.app'} target='_blank' rel='noopener noreferrer'>
+                  <button className='bg-white hover:bg-yellow-500 px-7 py-3 rounded-lg'>
                       <h1 className='text-black font-bold'>
-                        Launch on Mode
+                        Launch on Mode Sepolia
                       </h1>
                   </button>
                 </a>
