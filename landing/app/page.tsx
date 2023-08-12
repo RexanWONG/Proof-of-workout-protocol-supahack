@@ -34,7 +34,7 @@ export default function Home() {
                   <button className='bg-white hover:bg-yellow-500 px-7 py-3 rounded-lg'>
                       <h1 className='text-black font-bold'>
                         Launch on Mode Sepolia
-                      </h1>
+                      </h1> //https://9cc9-34-168-44-10.ngrok-free.app
                   </button>
                 </a>
             </div>
