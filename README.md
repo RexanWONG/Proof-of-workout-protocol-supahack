@@ -1,5 +1,6 @@
 # Proof-of-workout-protocol-supahack
 EthGlobal Supahack
+https://ethglobal.com/showcase/proof-of-workout-protocol-b8j3u
 
 # 🪙 POW Tokenomics Details
 
